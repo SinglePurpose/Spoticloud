@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Music Player</title>
+</head>
+<body>
+<h1>Music Player:</h1>
+
+<div id="audio-container">
+  <audio id="audio">
+    <source src="music/One_More_time.mp3" type="audio/mp3">
+  </audio>
+
+  <div id="audio-controls">
+      <button type="button" id="play-pause">Play</button>
+      <input type="range" id="seek-bar" value="0">
+      <button type="button" id="mute">Mute</button>
+      <input type="range" id="volume-bar" min="0" max="1" step="0.01" value="0.75">
+  </div>
+</div>
+
+<script src="js/player-controls.js"></script>
+
+</body>
+</html>
