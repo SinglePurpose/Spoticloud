@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Spoticloud</title>
+  <link rel="stylesheet" type="text/css" href="css/player-bar.css">
+  <script src="js/angular.min.js"></script>
+</head>
+
+<body ng-app="spoticloud">
+
+  <div class="main" ng-controller="MainController">
+    
+    <h1>{{ title }}</h1>
+    <h1>{{ 3 + 3 }}</h1>
+    <h1>{{ hello }}</h1>
+    <input type="text" ng-model="hello"/>
+
+    <audio id="audio">
+      <source src="music/One_More_time.mp3" type="audio/mp3">
+    </audio>
+
+
+    <div class="player-bar">
+      <div id="audio-controls">
+        <button type="button" id="play-pause">Play</button>
+        <input type="range" id="seek-bar" value="0">
+        <button type="button" id="mute">Mute</button>
+        <input type="range" id="volume-bar" min="0" max="1" step="0.01" value="0.75">
+      </div>
+    </div>
+  </div>
+
+  <script src="js/player-controls.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/controllers/MainController.js"></script>
+
+</body>
+
+</html>
