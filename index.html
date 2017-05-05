@@ -10,25 +10,32 @@
 <body ng-app="spoticloud">
 
   <div class="main" ng-controller="MainController">
-    
-    <h1>{{ title }}</h1>
-    <h1>{{ 3 + 3 }}</h1>
-    <h1>{{ hello }}</h1>
-    <input type="text" ng-model="hello"/>
 
     <audio id="audio">
-      <source src="music/One_More_time.mp3" type="audio/mp3">
+      <source src="music/Strike.mp3" type="audio/mp3">
+      <source src="music/Sentient.mp3" type="audio/mp3">
+      <source src="music/Forgotten_Myths.mp3" type="audio/mp3">
+      <source src="music/View_From_Above.mp3" type="audio/mp3">
     </audio>
 
+    <table id="songlist">
+      <tr><th>Title</th><th>Artist</th><th>Genre</th><th>Length</th><th>Year</th></tr>
+      <tr ng-repeat="songs in songs">
+        <td>{{ songs.title }}</td>
+        <td>{{ songs.artist }}</td>
+        <td>{{ songs.genre }}</td>
+        <td>{{ songs.length }}</td>
+        <td>{{ songs.year }}</td>
+      </tr>
+    </table>
 
-    <div class="player-bar">
-      <div id="audio-controls">
-        <button type="button" id="play-pause">Play</button>
-        <input type="range" id="seek-bar" value="0">
-        <button type="button" id="mute">Mute</button>
-        <input type="range" id="volume-bar" min="0" max="1" step="0.01" value="0.75">
-      </div>
+    <div id="audio-controls" class="player-bar">
+      <button type="button" id="play-pause">Play</button>
+      <input type="range" id="seek-bar" value="0">
+      <button type="button" id="mute">Mute</button>
+      <input type="range" id="volume-bar" min="0" max="1" step="0.01" value="0.75">
     </div>
+    
   </div>
 
   <script src="js/player-controls.js"></script>
