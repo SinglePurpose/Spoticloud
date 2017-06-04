@@ -18,16 +18,27 @@
       <source src="music/View_From_Above.mp3" type="audio/mp3">
     </audio>
 
+    <form action="songUpload.php" method="post" enctype="multipart/form-data">
+        Select song to upload:
+        <input type="file" name="fileToUpload" id="fileToUpload">
+        <input type="submit" value="Upload Song" name="submit">
+    </form>
+
+
     <table id="songlist">
       <tr><th>Title</th><th>Artist</th><th>Genre</th><th>Length</th><th>Year</th></tr>
-      <tr ng-repeat="songs in songs">
-        <td>{{ songs.title }}</td>
-        <td>{{ songs.artist }}</td>
-        <td>{{ songs.genre }}</td>
-        <td>{{ songs.length }}</td>
-        <td>{{ songs.year }}</td>
+      <tr ng-repeat="song in songs">
+        <td>{{ song.title }}</td>
+        <td>{{ song.artist }}</td>
+        <td>{{ song.genre }}</td>
+        <td>{{ song.length }}</td>
+        <td>{{ song.year }}</td>
       </tr>
     </table>
+
+    <div id="debug">
+        <h1>{{ test }}</h1>
+    </div>
 
     <div id="audio-controls" class="player-bar">
       <button type="button" id="play-pause">Play</button>
