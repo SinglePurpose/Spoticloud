@@ -1,57 +1,46 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <title>Spoticloud</title>
-  <link rel="stylesheet" type="text/css" href="css/player-bar.css">
-  <script src="js/angular.min.js"></script>
+	<title>Spoticloud</title>
+	<link rel="stylesheet" type="text/css" href="css/player-bar.css">
+	<script src="js/angular.min.js"></script>
+	<script src="js/angular-route.js"></script>
 </head>
 
 <body ng-app="spoticloud">
 
-  <div class="main" ng-controller="MainController">
+	<div class="main" ng-controller="MainController">
 
-    <form action="songUpload.php" method="post" enctype="multipart/form-data">
-        Select song to upload:
-        <input type="file" name="fileToUpload" id="fileToUpload">
-        <input type="submit" value="Upload Song" name="submit">
-        <br />
-        <input type="text" name="title" placeholder="title" id="titleInput">
-        <input type="text" name="artist" placeholder="artist" id="artistInput">
-        <input type="text" name="genre" placeholder="genre" id="genreInput">
-        <input type="number" name="length" placeholder="length" id="lengthInput">
-        <input type="number" name="year" placeholder="year" id="yearInput">
-    </form>
+		<a href="#!songUpload">Click here to upload a song</a>
+		<div ng-view></div>
 
-    <br><br>
+		<br><br>
 
-    <table id="songlist">
-      <tr><th>Title</th><th>Artist</th><th>Genre</th><th>Length</th><th>Year</th><th></th></tr>
-      <tr ng-repeat="song in songs">
-        <td>{{ song.title }}</td>
-        <td>{{ song.artist }}</td>
-        <td>{{ song.genre }}</td>
-        <td>{{ song.length }}</td>
-        <td>{{ song.year }}</td>
-        <td><a href="" ng-click="songSelect(song.filename)">{{song.filename}}</a></td>
-      </tr>
-    </table>
+		<table id="songlist">
+			<tr><th>Title</th><th>Artist</th><th>Genre</th><th>Length</th><th>Year</th><th></th></tr>
+			<tr ng-repeat="song in songs">
+				<td>{{ song.title }}</td>
+				<td>{{ song.artist }}</td>
+				<td>{{ song.genre }}</td>
+				<td>{{ song.length }}</td>
+				<td>{{ song.year }}</td>
+				<td><a href="" ng-click="songSelect(song.filename)">{{song.filename}}</a></td>
+			</tr>
+		</table>
 
-    <audio id="audio" data-ng-src="{{ selectedSongPath }}"></audio>
+		<audio id="audio" data-ng-src="{{ selectedSongPath }}"></audio>
 
-    <div id="audio-controls" class="player-bar">
-      <button type="button" id="play-pause">Play</button>
-      <input type="range" id="seek-bar" value="0">
-      <button type="button" id="mute">Mute</button>
-      <input type="range" id="volume-bar" min="0" max="1" step="0.01" value="0.75">
-    </div>
+		<div id="audio-controls" class="player-bar">
+			<button type="button" id="play-pause">Play</button>
+			<input type="range" id="seek-bar" value="0">
+			<button type="button" id="mute">Mute</button>
+			<input type="range" id="volume-bar" min="0" max="1" step="0.01" value="0.75">
+		</div>
     
-  </div>
+	</div>
 
-  <script src="js/player-controls.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/controllers/MainController.js"></script>
-
+	<script src="js/player-controls.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/controllers/MainController.js"></script>
 </body>
-
 </html>
