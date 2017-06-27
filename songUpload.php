@@ -4,6 +4,7 @@ $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $filename = basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $audioFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+$backToHome = 'index.html'; //variable für die main page, da der verweis zu der seite in html direkt im php echo nicht funktioniert
 
 $titleInput = $_POST["title"];
 $artistInput = $_POST["artist"];
@@ -19,11 +20,11 @@ if ($_FILES["fileToUpload"]["size"] > 20000000) {
 }
 //file upload to storage
  if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.<br>
+			 <a href='".$backToHome."'>Go back to Spoticloud Main Page</a>";
  } else {
         echo "Sorry, there was an error uploading your file.";
  }
- echo $titleInput;
 
 
 //write new song data into db
@@ -41,10 +42,8 @@ $sql = "INSERT INTO songs (title, artist, genre, length, year, filename)
 				'".$yearInput."',
 				'".$target_file."')";
 
-if ($conn->query($sql) === TRUE) {
-    echo "New db entry added successfully";
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+if ($conn->query($sql) === FALSE) {
+   echo "Error: " . $sql . "<br>" . $conn->error . "<br>File was not added into the database";   
 }
 
 $conn->close();
