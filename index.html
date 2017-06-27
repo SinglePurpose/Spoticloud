@@ -14,11 +14,13 @@
 		<a href="#!songUpload">Click here to upload a song</a>
 		<div ng-view></div>
 
-		<br><br>
+		<br>
+		<label>Search: <input ng-model="searchText"></label>
+		<br>
 
 		<table id="songlist">
 			<tr><th>Title</th><th>Artist</th><th>Genre</th><th>Length</th><th>Year</th><th></th></tr>
-			<tr ng-repeat="song in songs">
+			<tr ng-repeat="song in songs | filter:searchText">
 				<td>{{ song.title }}</td>
 				<td>{{ song.artist }}</td>
 				<td>{{ song.genre }}</td>
