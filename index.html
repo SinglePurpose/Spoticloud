@@ -24,11 +24,13 @@
 				<td>{{ song.title }}</td>
 				<td>{{ song.artist }}</td>
 				<td>{{ song.genre }}</td>
-				<td>{{ song.length }}</td>
+				<td>{{ song.length | secondsToDateTime | date:'mm:ss' }}</td>
 				<td>{{ song.year }}</td>
-				<td><a href="" ng-click="songSelect(song.filename)">{{song.filename}}</a></td>
+				<td><a href="" ng-click="songSelect(song.filename)">Play</a></td>
 			</tr>
 		</table>
+
+		<br><br><br><br>
 
 		<audio id="audio" data-ng-src="{{ selectedSongPath }}"></audio>
 
