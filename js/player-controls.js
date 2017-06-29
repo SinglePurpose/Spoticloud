@@ -8,6 +8,8 @@ var volumeBar = document.getElementById("volume-bar");
 
 var dblclick = document.getElementById("songlist");
 
+var isScrolling = false; //für isScrolling() um range thumb glitch zu umgehen
+
 // play/pause button
 playButton.addEventListener("click", function () {
   if (audio.paused == true) {
@@ -21,8 +23,10 @@ playButton.addEventListener("click", function () {
 
 //play song on double click
 dblclick.addEventListener("dblclick", function () {
+	seekBar.value = 0;
 	audio.play();
 	playButton.innerHTML = "Pause";
+
 });
 
 // mute button
@@ -42,13 +46,22 @@ seekBar.addEventListener("change", function () {
   audio.currentTime = time;
 });
 
+function ScrollCheck(x) {
+	if (x == true) {
+		isScrolling = true;
+	} else {
+		isScrolling = false;
+	}
+}
 // Update the seek bar as the audio plays
 audio.addEventListener("timeupdate", function () {
-  var value = (100 / audio.duration) * audio.currentTime;
-  seekBar.value = value;
+	if (isScrolling == false) {
+		var value = (100 / audio.duration) * audio.currentTime;
+		seekBar.value = value;
+	}
 });
 
-// volume bar
-volumeBar.addEventListener("change", function () {
-  audio.volume = volumeBar.value;
-});
+// volume bar with real time volume change
+function SetVolume(val) {
+	audio.volume = val;
+}

@@ -24,7 +24,6 @@
 				<th style="width: 10%">Genre</th>
 				<th style="text-align: right">Length</th>
 				<th style="text-align: right">Year</th>
-				<!--<th></th>-->
 			</tr>
 			<tr ng-repeat="song in songs | filter:searchText" ng-dblclick="songSelect(song.filename)">
 				<td>{{ song.title }}</td>
@@ -32,7 +31,6 @@
 				<td>{{ song.genre }}</td>
 				<td style="text-align: right;">{{ song.length | secondsToDateTime | date:'m:ss' }}</td>
 				<td style="text-align: right;">{{ song.year }}</td>
-				<!--<td>Play</td>  evtl. später play button einfügen-->
 			</tr>
 		</table>
 
@@ -42,10 +40,10 @@
 
 		<div id="audio-controls" class="player-bar">
 			<button type="button" id="play-pause" style="margin: 20px">Play</button>
-			<input type="range" id="seek-bar" value="0" style="width: 25%">
+			<input type="range" id="seek-bar" value="0" style="width: 25%" oninput="ScrollCheck(true)" onmouseup="ScrollCheck(false)">
 			<button type="button" id="mute" style="margin: 20px">Mute</button>
 			<a>Volume:</a>
-			<input type="range" id="volume-bar" min="0" max="1" step="0.01" value="0.75" style="margin: 20px">
+			<input type="range" id="volume-bar" min="0" max="1" step="0.01" value="0.75" style="margin: 20px" onchange="SetVolume(this.value)" oninput="SetVolume(this.value)">
 		</div>
     
 	</div>
