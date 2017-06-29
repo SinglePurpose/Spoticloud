@@ -6,6 +6,7 @@ var muteButton = document.getElementById("mute");
 var seekBar = document.getElementById("seek-bar");
 var volumeBar = document.getElementById("volume-bar");
 
+var dblclick = document.getElementById("songlist");
 
 // play/pause button
 playButton.addEventListener("click", function () {
@@ -16,6 +17,12 @@ playButton.addEventListener("click", function () {
     audio.pause();
     playButton.innerHTML = "Play";
   }
+});
+
+//play song on double click
+dblclick.addEventListener("dblclick", function () {
+	audio.play();
+	playButton.innerHTML = "Pause";
 });
 
 // mute button
@@ -39,16 +46,6 @@ seekBar.addEventListener("change", function () {
 audio.addEventListener("timeupdate", function () {
   var value = (100 / audio.duration) * audio.currentTime;
   seekBar.value = value;
-});
-
-// Pause the audio when the slider handle is being dragged
-seekBar.addEventListener("mousedown", function () {
-  audio.pause();
-});
-
-// Play the audio when the slider handle is dropped
-seekBar.addEventListener("mouseup", function () {
-  audio.play();
 });
 
 // volume bar
