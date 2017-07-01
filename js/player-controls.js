@@ -23,10 +23,8 @@ playButton.addEventListener("click", function () {
 
 //play song on double click
 dblclick.addEventListener("dblclick", function () {
-	seekBar.value = 0;
 	audio.play();
 	playButton.innerHTML = "Pause";
-
 });
 
 // mute button

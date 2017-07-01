@@ -34,8 +34,8 @@ tr:hover {
 	background-color: #2f2f30
 }
 
-.player-bar > * {
-
+input[type=text], input[type=number] {
+	width: 250px;
 }
 
 input[type=range] {

@@ -1,5 +1,7 @@
 <?php
 error_reporting(0);
+define('MB', 1048576);
+
 session_start();
 require_once $_SERVER['DOCUMENT_ROOT'].'/getid3/getid3.php';
 $target_dir = "music/";
@@ -14,37 +16,63 @@ $ThisFileInfo = $getID3->analyze($target_file);
 getid3_lib::CopyTagsToComments($ThisFileInfo);
 
 
-$_SESSION['title'] = $ThisFileInfo['comments_html']['title'][0];
-$_SESSION['artist'] = $ThisFileInfo['comments_html']['artist'][0];
-$_SESSION['genre'] = $ThisFileInfo['comments_html']['genre'][0];
+$title = $ThisFileInfo['comments_html']['title'][0];
+$artist = $ThisFileInfo['comments_html']['artist'][0];
+$genre = $ThisFileInfo['comments_html']['genre'][0];
 $_SESSION['length'] = $ThisFileInfo['playtime_seconds'];
-$_SESSION['year'] = $ThisFileInfo['comments_html']['year'][0];
+$year = $ThisFileInfo['comments_html']['year'][0];
 
 
-// Check file size; other checks need to be added later: https://www.w3schools.com/php/php_file_upload.asp
-if ($_FILES["fileToUpload"]["size"] > 20000000) {
-    echo "Sorry, your file is too large.";
-	echo "<br><a href='".$backToHome."'>Go back to Spoticloud Main Page</a>";
+// Check file size
+if ($_FILES["fileToUpload"]["size"] > 20*MB) {
+    echo "Your file is too large.";
     $uploadOk = 0;
 }
 
+//check if file is mp3
+if ($audioFileType != "mp3") {
+    echo "File must be mp3";
+    $uploadOk = 0;
+}
 
 //file upload to storage
-if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        //header("Location: set_tags.html"); //redirect to tag html
-		//exit();
-} else {
-        echo "Sorry, there was an error uploading your file.";
+if ($uploadOk == 0) {
+        echo "<br>File wasn't uploaded<br><a href='".$backToHome."'>Go back to Spoticloud Main Page</a>";
 }
-echo'
-	<p>Please enter missing tags:</p>
-	<form action="set_tags.php" method="post" enctype="multipart/form-data">
-		<input type="text" name="title" value="'.$_SESSION['title'].'" placeholder="title" id="title">
-		<input type="text" name="artist" value="'.$_SESSION['artist'].'" placeholder="artist" id="artist">
-		<input type="text" name="genre" value="'.$_SESSION['genre'].'" placeholder="genre" id="genre">
-		<input type="number" name="year" value="'.$_SESSION['year'].'" placeholder="year" id="year">
-		<input type="submit" value="Add tags to song" name="submit">
-	</form>
-';
- 
+
+// alle checks durch: file hochladen und tags setzen
+if ($uploadOk == 1) {
+	move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
+	echo'
+		<head>
+			<title>Spoticloud</title>
+			<link rel="stylesheet" type="text/css" href="css/style.css">
+		</head>
+		<body>
+			<p>Please enter missing tags:</p>
+			<form action="set_tags.php" method="post" enctype="multipart/form-data">
+
+			<table>
+				<tr>
+					<td>Title </td>
+					<td><input type="text" name="title" value="'.$title.'" placeholder="Title" id="title"></td>
+				</tr>
+				<tr>
+					<td>Artist </td>
+					<td><input type="text" name="artist" value="'.$artist.'" placeholder="Artist" id="artist"></td>
+				</tr>
+				<tr>
+					<td>Genre </td>
+					<td><input type="text" name="genre" value="'.$genre.'" placeholder="Genre" id="genre"></td>
+				</tr>
+				<tr>
+					<td>Year </td>
+					<td><input type="number" name="year" value="'.$year.'" placeholder="Year" id="year"></td>
+				</tr>
+			</table>
+				<input type="submit" value="Confirm tags" name="submit">
+			</form>
+		</body>
+	';
+}
 ?>
