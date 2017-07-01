@@ -1,3 +1,11 @@
+<?php
+if(!empty($_SESSION['userID'])){
+	echo"<h1>--Spoticloud--</h1><br>";
+}else {
+	header('Location: index2.php?form=login');
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
