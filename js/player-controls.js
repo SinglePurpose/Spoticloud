@@ -45,12 +45,9 @@ seekBar.addEventListener("change", function () {
 });
 
 function ScrollCheck(x) {
-	if (x == true) {
-		isScrolling = true;
-	} else {
-		isScrolling = false;
-	}
+	x == true ? isScrolling = true : isScrolling = false
 }
+
 // Update the seek bar as the audio plays
 audio.addEventListener("timeupdate", function () {
 	if (isScrolling == false) {

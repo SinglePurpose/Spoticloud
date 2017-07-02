@@ -1,7 +1,7 @@
 <?php
 session_start();
 $target_file = $_SESSION['target_file'];
-$backToHome = 'index.html'; //variable für die main page, da der verweis zu der seite in html direkt im php echo nicht funktioniert
+$backToHome = 'index2.php?page=settings'; //variable für die main page, da der verweis zu der seite in html direkt im php echo nicht funktioniert
 
 $title = $_POST["title"];
 $artist = $_POST["artist"];

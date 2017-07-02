@@ -12,7 +12,7 @@ $uploadOk = 1;
 $audioFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 $backToHome = 'index.html'; //variable für die main page, da der verweis zu der seite in html direkt im php echo nicht funktioniert
 $getID3 = new getID3;
-$ThisFileInfo = $getID3->analyze($target_file);
+$ThisFileInfo = $getID3->analyze($_FILES["fileToUpload"]["tmp_name"]);
 getid3_lib::CopyTagsToComments($ThisFileInfo);
 
 
@@ -49,7 +49,7 @@ if ($uploadOk == 1) {
 			<link rel="stylesheet" type="text/css" href="css/style.css">
 		</head>
 		<body>
-			<p>Please enter missing tags:</p>
+			<p>Please enter missing tags: </p>
 			<form action="set_tags.php" method="post" enctype="multipart/form-data">
 
 			<table>

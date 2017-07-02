@@ -1,0 +1,54 @@
+<--Spoticloud Music Player-->
+
+Viele coole Features:
+- User Registrierung / Login
+- Eigener mp3 Upload
+- Automatische ID3 tag Erkennung mit getID3()(http://www.getid3.org/)
+- Manuelle Tag Bearbeitung / Ergänzung
+- Automatische Berechnung der Songlänge
+- Auflistung aller Lieder
+- Doppelklick zum Abspielen
+- Dynamische Songauflistung durch AngularJS 1
+- Superschnelle Songsuche durch AngularJS 1
+- Eigene DB für die Metadaten
+- Stufenlose Lautstärkeeinstellung
+- Veränderung der Songposition
+- Pause / Mute Button
+- Live Anzeige von Songposition
+- Dynamisches Design (funktioniert also mit allen gängigen Auflösungen)
+
+Wie funktioniert der Songupload?
+- User wählt Datei
+- Größen- und Extensioncheck
+- Tags der Datei werden gelesen
+- Wenn Checks bestanden -> Datei wird ins Verzeichnis "/music" gepackt
+- Neue Seite: Gelesene Tags werden eingetragen als Vorschlag
+- Man kann Tags jetzt ergänzen oder ändern
+- Button "Confirm Tags" -> Daten werden in die Song DB eingetragen
+- Neue Seite die zeigt ob alles geklappt hat -> Redirect auf Homepage
+- Mit Angular werden die Songdaten aus der DB als JSON gezogen und in einer Tabelle ausgegeben
+
+Wie funktioniert der Player?
+- Komplett Javascript
+- Reinladen eines songs in den Player mit AngularJS 1
+- Doppelklick auf Tabellenzeile -> der Songpfad (zu "/music") wird mit Angular an das HTML5 audio Element als source weitergegeben
+- Der Player lädt die neue Quelle in die audio variable
+- Die Player Elemente benutzen die Standard HTML5 audio Funktionen (play; pause; mute; source; time etc)
+
+Design:
+- CSS only
+- Die Standard HTML Slider im Player wurden ersetzt
+- Die Schriftart und Hintergrund wurden verschönert
+- Dynamisches Design durch prozentuale Aufteilung vieler Elements
+
+Bugs!
+Aus Zeitgründen war es uns leider nicht möglich ein paar kleinere Bugs und auch einen relativ schwerwiegenden Bug zu fixen:
+- Appbreaker: Die mp3 Datei darf keine Sonderzeichen enthalten (ß, ö, ä, µ etc.) sonst wird die Tabelle nicht mehr angezeigt nach Song Upload. Klammern und Minus gehen.
+- Nach Doppelklick auf Song springt die Zeitanzeige kurz in die Mitte
+- Songs werden nicht hintereinander abgespielt. Für einen neuen Song muss man wieder doppelklicken
+- Das Upload Formular kann nicht geschlossen werden nachdem man es einmal geöffnet hat (Reload notwendig)
+
+Weitere Hinweise:
+- Homepage ist die Seite index2.php
+- Testsongs sind alle von https://freemusicarchive.org (CC Lizenz, damit wir es auf Github stellen können)
+- Die sql datei im Root beinhaltet die user und song db. In der Song DB befinden sich schon die Lieder im "music" Ordner

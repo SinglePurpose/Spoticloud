@@ -35,10 +35,10 @@ if (!empty ($_SESSION['userID'])){
 
 echo "
 	<p>
-	<a href = 'index2.php?form=register'>Register</a>
-	<a href = 'index2.php?form=login'>Login</a>
-	<a href = 'index2.php?page=settings'>Spoticloud</a>
-	<a href = 'index2.php?page=logout'>Logout</a>
+	<a href = 'index2.php?form=register' style='color: burlywood'>Register</a>
+	<a href = 'index2.php?form=login' style='color: burlywood'>Login</a>
+	<a href = 'index2.php?page=settings' style='color: burlywood'>Spoticloud</a>
+	<a href = 'index2.php?page=logout' style='color: burlywood'>Logout</a>
 	<p/>                                                                                                                                                                                                                                                                      
 	";
 	
